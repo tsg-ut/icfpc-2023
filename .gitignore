@@ -1,0 +1,6 @@
+.vscode/*
+bin/*
+input/*
+output*/*
+src/nlohmann/*
+token

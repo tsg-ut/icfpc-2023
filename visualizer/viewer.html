@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.2.0/svg.min.js" crossorigin="anonymous"></script>
+
+        <!-- https://d3js.org/getting-started#d3-in-vanilla-html -->
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+        <!-- https://observablehq.com/plot/getting-started#plot-in-vanilla-html -->
+        <!-- script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script -->
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js" crossorigin="anonymous"></script>
+        <style>[v-cloak]>*{display: none} [v-cloak]::before{content:"loading..."}</style>
+
+        <style>
+.is-fullwidth { width: 100%; }
+.is-fullheight { height: 100%; }
+        </style>
+
+    </head>
+
+    <body class="is-fullwidth">
+        <section class="section is-fullwidth">
+            <div class="container">
+                <div id="app">
+                    <div class="tabs">
+                        <ul>
+                            <li @click="updateTab('room')" :class="{'is-active': tab === 'room'}"><a>Room</a></li>
+                            <li @click="updateTab('mountain')" :class="{'is-active': tab === 'mountain'}"><a>Mountain</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="is-flex is-flex-direction-column is-fullwidth" v-if="tab === 'room' || tab === 'mountain'">
+                        <div class="is-flex is-flex-direction-column is-fullwidth">
+                            <div class="is-flex is-flex-direction-column is-fullwidth">
+                                <p>Problem ID</p>
+                                <div class="is-flex is-flex-direction-row is-fullwidth">
+                                    <button class="button is-dark is-outlined is-rounded" @click="++room_problemid > 0 && submit()">+</button>
+                                    <button class="button is-dark is-outlined is-rounded" @click="--room_problemid > 0 && submit()">-</button>
+                                    <input
+                                        id="input" class="is-fullwidth input"
+                                                   @change="parseInt(room_problemid) > 0 && submit()"
+                                                   @keyup="parseInt(room_problemid) > 0 && submit()"
+                                                   v-model="room_problemid"
+                                    >
+                                </div>
+                            </div>
+
+                            <button class="button is-primary" @click="submit">→→→！！！無料！いますぐ契約！！！←←←</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="canvas" class="is-fullwidth"></div> <!-- FIXME: Vue!!! -->
+                <div id="mountain-d3" class="is-fullwidth"></div> <!-- FIXME: Vue!!! -->
+            </div>
+        </section>
+
+        <script src="viewer.js"></script>
+    </body>
+</html>
